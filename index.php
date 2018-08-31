@@ -1,6 +1,7 @@
 <?php
 require_once 'class/ArrayToFile.php';
 require_once 'class/Dbconnect.php';
+require_once 'class/Helper.php';
 
 CONST filename1 = 'array-1.json';
 CONST filename2 = 'array-2.json';
@@ -12,6 +13,28 @@ if (!file_exists(filename1) && !file_exists(filename2)) {
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 } else $page = 1;
+
+/*     3 Задание (заполнить сущность созданной БД)
+$file = file_get_contents(filename1);
+$file2 = file_get_contents(filename2);
+
+$mass = Helper::strToMass($file);
+$mass2 = Helper::strToMass($file2);
+
+foreach ($mass as $key => $value){
+    $name = "Василий".$key;
+    $surname = "Пупкин".($key+6);
+    $patronymic = "Александрович".$value;
+    $date = new DateTime();
+    $date->modify('-21 year');
+    $date->modify('-'.$key.' day');
+    $date = $date->format('Y-m-d');
+    $amount = $value + $mass[4];
+    Dbconnect::insert($name,$surname,$patronymic,$date,$amount);
+}
+
+*/
+
 ?>
 
 <!doctype html>
@@ -80,26 +103,26 @@ if (isset($_GET['page'])) {
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-record">
+                <form id="add-record" class="needs-validation" novalidate>
                     <div class="form-group">
                         <label for="name" class="col-form-label">Имя:</label>
-                        <input type="text" class="form-control" id="name" required>
+                        <input type="text" data-name="Имя" class="form-control" id="name" required>
                     </div>
                     <div class="form-group">
                         <label for="surname" class="col-form-label">Фамилия:</label>
-                        <input type="text" class="form-control" id="surname" required>
+                        <input type="text" data-name="Фамилия" class="form-control" id="surname" required>
                     </div>
                     <div class="form-group">
                         <label for="patronymic" class="col-form-label">Отчество:</label>
-                        <input type="text" class="form-control" id="patronymic" required>
+                        <input type="text" data-name="Отчество" class="form-control" id="patronymic" required>
                     </div>
                     <div class="form-group">
                         <label for="date" class="col-form-label">Дата Рождения:</label>
-                        <input type="date" class="form-control" id="date" name="date" placeholder="Дата" required>
+                        <input type="date" data-name="Дата Рождения" class="form-control" id="date" name="date" placeholder="Дата" required>
                     </div>
                     <div class="form-group">
                         <label for="amount" class="col-form-label">Сумма на счете:</label>
-                        <input type="text" class="form-control" id="amount" required>
+                        <input type="text" data-name="Сумма на счете" class="form-control" id="amount" required>
                     </div>
                 </form>
             </div>
